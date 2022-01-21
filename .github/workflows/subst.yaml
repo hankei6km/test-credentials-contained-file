@@ -23,7 +23,7 @@ jobs:
       - name: Check
         run: |
           echo "-- sha256sum"
-          sha256sum < secret_file.json
+          jq < secret_file.json | sha256sum 
           echo "-- ファイル表示 cat secret_file.json"
           cat secret_file.json
           echo "-- フィールド表示 jq .password secret_file.json"
