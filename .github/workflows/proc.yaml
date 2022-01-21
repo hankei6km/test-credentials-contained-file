@@ -14,8 +14,8 @@ jobs:
       - name: Check
         run: |
           echo "-- sha256sum"
-          jq <(jq '.name = env.NAME' secret_file_src.json | jq '.password = env.PASSWORD') | sha256sum 
-          echo "-- ファイル表示 cat <(jq '.name = env.NAME' secret_file_src.json | jq '.password = env.PASSWORD')"
-          cat <(jq '.name = env.NAME' secret_file_src.json | jq '.password = env.PASSWORD')
-          echo "-- フィールド表示 jq .password <(jq '.name = env.NAME' secret_file_src.json | jq '.password = env.PASSWORD')"
-          jq .password <(jq '.name = env.NAME' secret_file_src.json | jq '.password = env.PASSWORD')
+          jq . <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD') | sha256sum 
+          echo "-- ファイル表示 cat <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')"
+          cat <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')
+          echo "-- フィールド表示 jq .password <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')"
+          jq .password <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')
