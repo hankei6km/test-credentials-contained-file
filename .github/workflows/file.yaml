@@ -7,6 +7,7 @@ on:
 jobs:
   save-file-from-secret:
     runs-on: ubuntu-latest
+    environment: file
 
     steps:
       - uses: actions/checkout@v2

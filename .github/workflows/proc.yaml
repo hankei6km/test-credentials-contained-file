@@ -7,6 +7,7 @@ on:
 jobs:
   build-file-by-proc-subst:
     runs-on: ubuntu-latest
+    environment: proc
 
     steps:
       - uses: actions/checkout@v2

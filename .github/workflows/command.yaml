@@ -7,6 +7,7 @@ on:
 jobs:
   build-file-by-command:
     runs-on: ubuntu-latest
+    environment: command
 
     steps:
       - uses: actions/checkout@v2
