@@ -32,3 +32,6 @@ jobs:
           jq .password secret_file.json
           echo "-- 値として表示 jq -r .password secret_file.json"
           jq -r .password secret_file.json
+        env:
+          NAME: ${{ secrets.NAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
