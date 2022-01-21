@@ -1,0 +1,26 @@
+name: Save file from SECRET
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  save-file-from-secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Save the sercret file
+        run: echo -n "${SECRET_FILE}" > secret_file.json
+        env:
+          SECRET_FILE: ${{ secrets.SECRET_FILE }}
+
+      - name: Check
+        run: |
+          echo "-- sha256sum"
+          sha256sum < secret_file.json
+          echo "-- ファイル表示 cat secret_file.json"
+          cat secret_file.json
+          echo "-- フィールド表示 jq .password secret_file.json"
+          jq .password secret_file.json
