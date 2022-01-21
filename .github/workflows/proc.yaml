@@ -19,3 +19,6 @@ jobs:
           cat <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')
           echo "-- フィールド表示 jq .password <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')"
           jq .password <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')
+        env:
+          NAME: ${{ secrets.NAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
