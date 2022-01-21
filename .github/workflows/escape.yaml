@@ -24,6 +24,8 @@ jobs:
         run: |
           echo "-- sha256sum"
           jq < secret_file.json | sha256sum 
+          echo "-- check"
+          echo -n "${PASSWORD}" | sha256sum 
           echo "-- ファイル表示 cat secret_file.json"
           cat secret_file.json
           echo "-- フィールド表示 jq .password secret_file.json"
