@@ -1,0 +1,24 @@
+name: Biild file by process substitution
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  build-file-by-proc-subst:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check
+        run: |
+          echo "-- sha256sum"
+          jq . <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD') | sha256sum 
+          echo "-- ファイル表示 cat <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')"
+          cat <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')
+          echo "-- フィールド表示 jq .password <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')"
+          jq .password <(jq '.name = env.NAME' < secret_file_src.json | jq '.password = env.PASSWORD')
+        env:
+          NAME: ${{ secrets.NAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
