@@ -1,4 +1,4 @@
-Game: Biild file by using command
+name: Biild file by using command
 on:
   push:
     branches:
