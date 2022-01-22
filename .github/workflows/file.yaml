@@ -25,3 +25,5 @@ jobs:
           cat secret_file.json
           echo "-- フィールド表示 jq .password secret_file.json"
           jq .password secret_file.json
+          echo "-- フィールド表示(RAW) jq -r .password secret_file.json"
+          jq -r .password secret_file.json
