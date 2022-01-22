@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Save the sercret file
-        run: echo -n "${SECRET_FILE}" > secret_file.json
+        run: envsubst < secret_file_src_envsubst.json > secret_file.json
         env:
           SECRET_FILE: ${{ secrets.SECRET_FILE }}
 
@@ -25,3 +25,5 @@ jobs:
           cat secret_file.json
           echo "-- フィールド表示 jq .password secret_file.json"
           jq .password secret_file.json
+          echo "-- フィールド表示(RAW) jq -r .password secret_file.json"
+          jq -r .password secret_file.json
