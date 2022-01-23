@@ -1,0 +1,41 @@
+name: Refresh field value
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  refresh-field-value:
+    runs-on: ubuntu-latest
+    environment: refresh
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Save the sercret file
+        run: |
+          jq '.name = env.NAME' secret_file_src.json  \
+          | jq '.password = env.PASSWORD' > secret_file.json
+        env:
+          NAME: ${{ secrets.NAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+
+      - name: Check
+        run: |
+          echo "-- sha256sum"
+          jq < secret_file.json | sha256sum 
+          echo "-- ファイル表示 cat secret_file.json"
+          cat secret_file.json
+          echo "-- フィールド表示 jq .password secret_file.json"
+          jq .password secret_file.json
+          echo "-- フィールド表示(RAW) jq -r .password secret_file.json"
+          jq -r .password secret_file.json
+          echo "-- password を picture1 へ変更
+          jq '.name = env.NAME' secret_file_src.json  \
+          | jq '.password = picture1' > secret_file.json
+          echo "-- ファイル表示 cat secret_file.json"
+          cat secret_file.json
+          echo "-- フィールド表示 jq .password secret_file.json"
+          jq .password secret_file.json
+          echo "-- フィールド表示(RAW) jq -r .password secret_file.json"
+          jq -r .password secret_file.json
