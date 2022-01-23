@@ -32,7 +32,7 @@ jobs:
           jq -r .password secret_file.json
           echo "-- password を picture1 へ変更"
           jq '.name = env.NAME' secret_file_src.json  \
-          | jq '.password = picture1' > secret_file.json
+          | jq '.password = "picture1"' > secret_file.json
           echo "-- ファイル表示 cat secret_file.json"
           cat secret_file.json
           echo "-- フィールド表示 jq .password secret_file.json"
